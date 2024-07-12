@@ -28,7 +28,7 @@ locals {
 data "google_project" "project" {}
 
 module "github_token" {
-  source     = "../secret"
+  source     = "github.com/brandlive1941/terraform-module-gcp-secret?ref=v1.0.0"
   project_id = var.project_id
   github_org = var.github_org
   repo_name  = var.terraform_repo_name
@@ -37,7 +37,7 @@ module "github_token" {
 }
 
 module "github_app_cloudbuild_installation_id" {
-  source     = "../secret"
+  source     = "github.com/brandlive1941/terraform-module-gcp-secret?ref=v1.0.0"
   project_id = var.project_id
   github_org = var.github_org
   repo_name  = var.terraform_repo_name
