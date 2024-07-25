@@ -5,7 +5,8 @@ locals {
     "roles/editor",                          # allow to manage all resources
     "roles/iam.serviceAccountTokenCreator",  # allow to create tokens for service accounts
     "roles/container.clusterViewer",         # allow access to GKE
-    "roles/iam.roleAdmin"                    # allow to manage roles
+    "roles/iam.roleAdmin",                   # allow to manage roles
+    "roles/run.admin"                        # allow to manage Cloud Run
   ]
   seretAdmins = [
     "serviceAccount:service-${data.google_project.project.number}@gcp-sa-cloudbuild.iam.gserviceaccount.com"
