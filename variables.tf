@@ -35,4 +35,10 @@ variable "terraform_repo_name" {
   default     = "terraform-gcp"
 }
 
+variable "name" {
+  description = "Pool Provider Name"
+  type        = string
+  default     = ""
+}
+
 
