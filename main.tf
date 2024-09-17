@@ -1,4 +1,6 @@
 locals {
+  name = var.github_org ? "gh-${var.github_org}" : "github-brandlive"
+  
   githubSARoles = [
     "roles/resourcemanager.projectIamAdmin", # GitHub Integration identity
     "roles/secretmanager.admin",             # Secret Manager Admin
@@ -114,8 +116,8 @@ resource "google_project_iam_member" "github_sa_roles" {
 
 resource "google_iam_workload_identity_pool" "github" {
   project                   = var.project_id
-  workload_identity_pool_id = "gh-${var.github_org}"
-  display_name              = "gh-${var.github_org}"
+  workload_identity_pool_id = local.name
+  display_name              = local.name
   description               = "for GitHub Integration"
 }
 
