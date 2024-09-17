@@ -1,6 +1,6 @@
 locals {
-  name = var.github_org ? "gh-${var.github_org}" : "github-brandlive"
-  
+  name = var.name ? var.name : "gh-${var.github_org}"
+
   githubSARoles = [
     "roles/resourcemanager.projectIamAdmin", # GitHub Integration identity
     "roles/secretmanager.admin",             # Secret Manager Admin
