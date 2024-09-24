@@ -130,7 +130,7 @@ resource "google_iam_workload_identity_pool_provider" "github" {
   # See. https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#understanding-the-oidc-token
   attribute_mapping = {
     "google.subject"             = "assertion.sub"
-    "attribute.repository"       = "assertion.repo"
+    "attribute.repository"       = "assertion.repository"
     "attribute.repository_owner" = "assertion.repository_owner"
     "attribute.refs"             = "assertion.ref"
   }
@@ -138,6 +138,8 @@ resource "google_iam_workload_identity_pool_provider" "github" {
   oidc {
     issuer_uri = "https://token.actions.githubusercontent.com"
   }
+
+  attribute_condition = "assertion.repository_owner=='${var.github_org}'"
 }
 
 resource "google_service_account_iam_member" "github" {
