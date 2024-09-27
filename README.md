@@ -24,7 +24,8 @@ module "github_integration" {
 
 Outputs
 =======
- - `service_account_email` - Service Account Email 
+ - `service_account_email` - Service Account Email
+ 
  The following are usable in Github Actions, see see: https://github.com/google-github-actions/auth
  - `google_service_id` - Service Account ID 
 - `workload_identity_pool_provider_id` - Workload Identity Pool  Provider ID
