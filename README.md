@@ -24,12 +24,10 @@ module "github_integration" {
 
 Outputs
 =======
-
- - `storage bucket fqdn` - FQDN of the bucket
- - `google_service_account` - Service Account used by GitHub integration
- - `service_account_github_email` - Service Account Email used by GitHub integration
- - `service_account_github_id` - Service Account ID used by GitHub integration
-- `google_iam_workload_identity_pool` - Workload Identity Pool Provider Name
+ - `service_account_email` - Service Account Email 
+ The following are usable in Github Actions, see see: https://github.com/google-github-actions/auth
+ - `google_service_id` - Service Account ID 
+- `workload_identity_pool_provider_id` - Workload Identity Pool  Provider ID
 
 Authors
 =======
