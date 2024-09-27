@@ -133,7 +133,7 @@ resource "google_iam_workload_identity_pool_provider" "github" {
     "attribute.repository"       = "assertion.repository"
     "attribute.repository_owner" = "assertion.repository_owner"
     "attribute.refs"             = "assertion.ref"
-    "attribute.aud"              = "//iam.googleapis.com/${google_iam_workload_identity_pool.github.name}/providers/github-provider"
+    "attribute.aud"              = "assertion.aud"
   }
 
   oidc {
