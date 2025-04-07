@@ -3,13 +3,14 @@ locals {
 
   githubSARoles = [
     "roles/resourcemanager.projectIamAdmin", # GitHub Integration identity
-    "roles/secretmanager.admin",             # Secret Manager Admin
     "roles/editor",                          # allow to manage all resources
     "roles/iam.serviceAccountTokenCreator",  # allow to create tokens for service accounts
     "roles/container.clusterViewer",         # allow access to GKE
     "roles/iam.roleAdmin",                   # allow to manage roles
-    "roles/run.admin",                        # allow to manage Cloud Run
-    "roles/iam.securityAdmin"                # allow to manage IAM
+    "roles/run.admin",                       # allow to manage Cloud Run
+    "roles/iam.securityAdmin",               # allow to manage IAM
+    "roles/secretmanager.secretAccessor",    # allow to access secrets
+    "roles/artifactregistry.reader",         # allow to access Artifact Registry
   ]
   seretAdmins = [
     "serviceAccount:service-${data.google_project.project.number}@gcp-sa-cloudbuild.iam.gserviceaccount.com"
