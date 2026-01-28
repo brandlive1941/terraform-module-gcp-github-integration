@@ -1,6 +1,9 @@
 locals {
   name = var.name == "" ? "gh-${var.github_org}" : var.name
 
+  # Use the provided project_number variable
+  project_number = var.project_number
+
   githubSARoles = [
     "roles/resourcemanager.projectIamAdmin", # GitHub Integration identity
     "roles/editor",                          # allow to manage all resources
@@ -12,16 +15,16 @@ locals {
     "roles/secretmanager.secretAccessor",    # allow to access secrets
     "roles/artifactregistry.reader",         # allow to access Artifact Registry
   ]
-  seretAdmins = [
-    "serviceAccount:service-${data.google_project.project.number}@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+  secretAdmins = [
+    "serviceAccount:service-${local.project_number}@gcp-sa-cloudbuild.iam.gserviceaccount.com"
   ]
   secretAccessors = [
-    "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com",
-    "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com",
+    "serviceAccount:${local.project_number}-compute@developer.gserviceaccount.com",
+    "serviceAccount:${local.project_number}@cloudbuild.gserviceaccount.com",
   ]
   githubTokenAccessors = [
-    "serviceAccount:service-${data.google_project.project.number}@gcp-sa-cloudbuild.iam.gserviceaccount.com",
-    "serviceAccount:service-${data.google_project.project.number}@serverless-robot-prod.iam.gserviceaccount.com",
+    "serviceAccount:service-${local.project_number}@gcp-sa-cloudbuild.iam.gserviceaccount.com",
+    "serviceAccount:service-${local.project_number}@serverless-robot-prod.iam.gserviceaccount.com",
   ]
   cloudBuildRoles = [
     "roles/cloudbuild.builds.builder",
@@ -29,8 +32,6 @@ locals {
     "roles/container.developer"
   ]
 }
-
-data "google_project" "project" {}
 
 module "github_token" {
   source     = "github.com/brandlive1941/terraform-module-gcp-secret?ref=v1.0.0"
@@ -51,7 +52,7 @@ module "github_app_cloudbuild_installation_id" {
 }
 
 resource "google_project_iam_member" "cloudbuild_secret_admin" {
-  for_each = toset(local.seretAdmins)
+  for_each = toset(local.secretAdmins)
 
   project = var.project_id
   role    = "roles/secretmanager.admin"
@@ -105,7 +106,7 @@ resource "google_project_iam_member" "cloudbuild_roles" {
   for_each = toset(local.cloudBuildRoles)
   project  = var.project_id
   role     = each.value
-  member   = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
+  member   = "serviceAccount:${local.project_number}@cloudbuild.gserviceaccount.com"
 }
 
 # Allow to access all resources

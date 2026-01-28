@@ -3,6 +3,11 @@ variable "project_id" {
   type        = string
 }
 
+variable "project_number" {
+  description = "GCP Project Number (required for for_each to work at plan time)"
+  type        = string
+}
+
 variable "region" {
   description = "GCP Project Region"
   type        = string
