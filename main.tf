@@ -8,6 +8,7 @@ locals {
     "roles/resourcemanager.projectIamAdmin", # GitHub Integration identity
     "roles/editor",                          # allow to manage all resources
     "roles/iam.serviceAccountTokenCreator",  # allow to create tokens for service accounts
+    "roles/container.admin",                 # allow to manage GKE resources and RBAC
     "roles/container.clusterViewer",         # allow access to GKE
     "roles/iam.roleAdmin",                   # allow to manage roles
     "roles/run.admin",                       # allow to manage Cloud Run
