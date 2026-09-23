@@ -41,4 +41,8 @@ variable "name" {
   default     = ""
 }
 
-
+variable "secret_replication_locations" {
+  description = "Regions to replicate the GitHub secrets to. Empty (the default) uses automatic replication, which stores them globally. Set this in projects whose org policy restricts resource locations, and set region to match."
+  type        = list(string)
+  default     = []
+}
