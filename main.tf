@@ -35,21 +35,25 @@ locals {
 }
 
 module "github_token" {
-  source     = "github.com/brandlive1941/terraform-module-gcp-secret?ref=v1.0.0"
+  source     = "github.com/brandlive1941/terraform-module-gcp-secret?ref=v1.1.0"
   project_id = var.project_id
   github_org = var.github_org
   repo_name  = var.terraform_repo_name
   name       = "github_token"
   value      = var.github_token
+
+  replication_locations = var.secret_replication_locations
 }
 
 module "github_app_cloudbuild_installation_id" {
-  source     = "github.com/brandlive1941/terraform-module-gcp-secret?ref=v1.0.0"
+  source     = "github.com/brandlive1941/terraform-module-gcp-secret?ref=v1.1.0"
   project_id = var.project_id
   github_org = var.github_org
   repo_name  = var.terraform_repo_name
   name       = "github_app_cloudbuild_installation_id"
   value      = var.github_app_cloudbuild_installation_id
+
+  replication_locations = var.secret_replication_locations
 }
 
 resource "google_project_iam_member" "cloudbuild_secret_admin" {
